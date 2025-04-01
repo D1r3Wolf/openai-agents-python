@@ -520,6 +520,8 @@ class OpenAIChatCompletionsModel(Model):
 
         # Match the behavior of Responses where store is True when not given
         store = model_settings.store if model_settings.store is not None else True
+        if "gemini" in self.model:
+            store = None
 
         ret = await self._get_client().chat.completions.create(
             model=self.model,
